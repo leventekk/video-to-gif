@@ -15,6 +15,7 @@
   },
   "pacakgeManager": "pnpm",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "fastify": "^4.23.2"
   },
   "devDependencies": {
