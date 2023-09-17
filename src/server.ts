@@ -3,8 +3,8 @@ const fastify = Fastify({
   logger: true,
 });
 
-fastify.get('/', async function handler() {
-  return { hello: 'world' };
+fastify.get('/healthcheck', async function handler() {
+  return 'ok';
 });
 
 (async () => {
