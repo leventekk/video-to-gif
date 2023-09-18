@@ -1,12 +1,12 @@
-import { type FastifyBaseLogger } from 'fastify';
 import { type VideoCache } from './VideoCache';
+import { type Logger } from '../Logger/Logger';
 
 const cache = new Map<string, string>();
 
 export class MemoryCache implements VideoCache {
-  private logger: FastifyBaseLogger;
+  private logger: Logger;
 
-  constructor(private loggerService: FastifyBaseLogger) {
+  constructor(private loggerService: Logger) {
     this.logger = this.loggerService.child({ service: 'MemoryCache' });
   }
 

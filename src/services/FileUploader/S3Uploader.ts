@@ -1,7 +1,7 @@
-import { type FastifyBaseLogger } from 'fastify';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { readFileSync } from 'node:fs';
 import { type FileUploader } from './FileUploader';
+import { type Logger } from '../Logger/Logger';
 
 interface S3Config {
   bucketName: string;
@@ -11,7 +11,7 @@ interface S3Config {
 }
 
 export class S3Uploader implements FileUploader {
-  constructor(private loggerService: FastifyBaseLogger, private config: S3Config) {}
+  constructor(private loggerService: Logger, private config: S3Config) {}
 
   private getObjectUrl(name: string) {
     return `https://${this.config.bucketName}.s3.${this.config.region}.amazonaws.com/${name}`;

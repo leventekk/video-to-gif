@@ -1,6 +1,6 @@
 import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-dynamodb';
-import { FastifyBaseLogger } from 'fastify';
 import { type VideoCache } from './VideoCache';
+import { type Logger } from '../Logger/Logger';
 
 interface DynamoDBConfig {
   tableName: string;
@@ -11,9 +11,9 @@ interface DynamoDBConfig {
 
 export class DynamoDBCache implements VideoCache {
   private client: DynamoDBClient;
-  private logger: FastifyBaseLogger;
+  private logger: Logger;
 
-  constructor(private loggerService: FastifyBaseLogger, private config: DynamoDBConfig) {
+  constructor(private loggerService: Logger, private config: DynamoDBConfig) {
     this.logger = this.loggerService.child({ service: 'DynamoDBCache' });
     this.client = new DynamoDBClient({
       region: this.config.region,

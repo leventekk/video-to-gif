@@ -1,11 +1,11 @@
 import Ffmpeg from 'ffmpeg';
 import sharp from 'sharp';
-import { type FastifyBaseLogger } from 'fastify';
-import { type VideoConverter } from './VideoConverter';
 import { createWriteStream } from 'fs';
+import { type VideoConverter } from './VideoConverter';
+import { type Logger } from '../Logger/Logger';
 
 export class FfmpegConverter implements VideoConverter {
-  constructor(private loggerService: FastifyBaseLogger) {}
+  constructor(private loggerService: Logger) {}
 
   async convert(path: string, outputPath: string) {
     const logger = this.loggerService.child({ service: 'FfmpegConverter' });

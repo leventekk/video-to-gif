@@ -1,9 +1,9 @@
-import { type FastifyBaseLogger } from 'fastify';
 import youtubeDL, { type YtFlags } from 'youtube-dl-exec';
 import { type VideoDownloader } from './VideoDownloader';
+import { type Logger } from '../Logger/Logger';
 
 export class YoutubeDownloader implements VideoDownloader {
-  constructor(private loggerService: FastifyBaseLogger) {}
+  constructor(private loggerService: Logger) {}
 
   async download(url: string, outputPath: string) {
     const logger = this.loggerService.child({ service: 'YoutubeDownloader' });

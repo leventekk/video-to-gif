@@ -9,6 +9,7 @@ import { FfmpegConverter } from './services/VideoConverter/FffmpegConverter';
 import { ProcessError } from './errors/ProcessError';
 import { S3Uploader } from './services/FileUploader/S3Uploader';
 import { DynamoDBCache } from './services/VideoCache/DynamoDBCache';
+import { FastifyLogger } from './services/Logger/FastifyLogger';
 
 const fastify = Fastify({
   logger: true,
@@ -29,16 +30,17 @@ fastify.post<{ Body: ConvertRequestType; Reply: ConvertRequestType }>(
     },
   },
   async function handler(request) {
+    const logger = new FastifyLogger(request.log)
     const videoService = new VideoService(
-      new YoutubeDownloader(request.log),
-      new DynamoDBCache(request.log, {
+      new YoutubeDownloader(logger),
+      new DynamoDBCache(logger, {
         tableName: process.env.DYNAMODB_CACHE_TABLE!,
         accessKey: process.env.S3_ACCESS_KEY!,
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
         region: process.env.S3_REGION!,
       }),
-      new FfmpegConverter(request.log),
-      new S3Uploader(request.log, {
+      new FfmpegConverter(logger),
+      new S3Uploader(logger, {
         bucketName: process.env.S3_BUCKET!,
         accessKey: process.env.S3_ACCESS_KEY!,
         secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
