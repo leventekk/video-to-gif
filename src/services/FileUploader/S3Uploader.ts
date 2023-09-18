@@ -13,6 +13,10 @@ interface S3Config {
 export class S3Uploader implements FileUploader {
   constructor(private loggerService: FastifyBaseLogger, private config: S3Config) {}
 
+  private getObjectUrl(name: string) {
+    return `https://${this.config.bucketName}.s3.${this.config.region}.amazonaws.com/${name}`;
+  }
+
   async upload(path: string, name: string) {
     const logger = this.loggerService.child({ service: 'S3Uploader' });
     const client = new S3Client({
@@ -32,8 +36,7 @@ export class S3Uploader implements FileUploader {
     try {
       await client.send(uploadCommand);
 
-      const objectUrl = `https://${this.config.bucketName}.s3.${this.config.region}.amazonaws.com/${name}`;
-
+      const objectUrl = this.getObjectUrl(name);
       logger.info('Uploaded file path: %s', objectUrl);
 
       return objectUrl;
