@@ -15,6 +15,7 @@
   },
   "pacakgeManager": "pnpm",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.414.0",
     "@fastify/type-provider-typebox": "^3.5.0",
     "@sinclair/typebox": "^0.31.15",
     "dotenv": "^16.3.1",
