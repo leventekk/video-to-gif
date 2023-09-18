@@ -4,22 +4,28 @@ import { type VideoCache } from './VideoCache';
 const cache = new Map<string, string>();
 
 export class MemoryCache implements VideoCache {
-  constructor(private loggerService: FastifyBaseLogger) {}
+  private logger: FastifyBaseLogger;
 
-  store(key: string, path: string) {
+  constructor(private loggerService: FastifyBaseLogger) {
+    this.logger = this.loggerService.child({ service: 'MemoryCache' });
+  }
+
+  async store(key: string, path: string) {
+    this.logger.info('Storing dataset %o in cache', { key, path });
     cache.set(key, path);
   }
 
-  has(key: string) {
-    const logger = this.loggerService.child({ service: 'MemoryCache' });
-    const hasCachedData = cache.has(key);
+  async get(key: string) {
+    const data = cache.get(key);
 
-    logger.info('%s was%s found in cache', key, hasCachedData ? '' : ' not');
+    if (data) {
+      this.logger.info('%s was found in cache: %s', key, data);
 
-    return hasCachedData;
-  }
+      return data;
+    }
 
-  get(key: string) {
-    return cache.get(key)!;
+    this.logger.info('%s was not found in cache', key);
+
+    return null;
   }
 }

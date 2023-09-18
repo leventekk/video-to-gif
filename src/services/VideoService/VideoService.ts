@@ -28,8 +28,10 @@ export class VideoService {
   }
 
   async process(url: string) {
-    if (this.cacheService.has(url)) {
-      return this.cacheService.get(url);
+    const cachedData = await this.cacheService.get(url)
+
+    if (cachedData) {
+      return cachedData;
     }
 
     try {
@@ -52,7 +54,7 @@ export class VideoService {
         return new ProcessError('Error during the file upload');
       }
 
-      this.cacheService.store(url, uploadPath);
+      await this.cacheService.store(url, uploadPath);
 
       return uploadPath;
     } catch (error) {

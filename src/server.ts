@@ -5,10 +5,10 @@ import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { ConvertRequest, type ConvertRequestType } from './schema/convert';
 import { YoutubeDownloader } from './services/VideoDownloader/YoutubeDownloader';
 import { VideoService } from './services/VideoService/VideoService';
-import { MemoryCache } from './services/VideoCache/MemoryCache';
 import { FfmpegConverter } from './services/VideoConverter/FffmpegConverter';
 import { ProcessError } from './errors/ProcessError';
 import { S3Uploader } from './services/FileUploader/S3Uploader';
+import { DynamoDBCache } from './services/VideoCache/DynamoDBCache';
 
 const fastify = Fastify({
   logger: true,
@@ -31,7 +31,12 @@ fastify.post<{ Body: ConvertRequestType; Reply: ConvertRequestType }>(
   async function handler(request) {
     const videoService = new VideoService(
       new YoutubeDownloader(request.log),
-      new MemoryCache(request.log),
+      new DynamoDBCache(request.log, {
+        tableName: process.env.DYNAMODB_CACHE_TABLE!,
+        accessKey: process.env.S3_ACCESS_KEY!,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+        region: process.env.S3_REGION!,
+      }),
       new FfmpegConverter(request.log),
       new S3Uploader(request.log, {
         bucketName: process.env.S3_BUCKET!,
@@ -40,7 +45,7 @@ fastify.post<{ Body: ConvertRequestType; Reply: ConvertRequestType }>(
         region: process.env.S3_REGION!,
       }),
     );
-    const videoProcess = await videoService.process(request.body.url);
+    const videoProcess = await videoService.process(request.body.url.trim());
 
     if (videoProcess instanceof ProcessError) {
       throw videoProcess;
