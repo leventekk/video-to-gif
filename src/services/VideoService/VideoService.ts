@@ -27,15 +27,19 @@ export class VideoService {
     rmSync(this.videoTempFile);
   }
 
-  async process(url: string) {
-    const cachedData = await this.cacheService.get(url)
+  private formatResponse(url: string) {
+    return { url };
+  }
 
-    if (cachedData) {
-      return cachedData;
+  async process(videoUrl: string) {
+    const cachedAssetUrl = await this.cacheService.get(videoUrl);
+
+    if (cachedAssetUrl) {
+      return this.formatResponse(cachedAssetUrl);
     }
 
     try {
-      const downloadedVideo = await this.downloaderService.download(url, this.videoTempFile);
+      const downloadedVideo = await this.downloaderService.download(videoUrl, this.videoTempFile);
 
       if (!downloadedVideo) {
         return new ProcessError('Error during the video download');
@@ -48,15 +52,15 @@ export class VideoService {
         return new ProcessError('Error during the gif conversion');
       }
 
-      const uploadPath = await this.uploaderService.upload(gifPath, fileName);
+      const assetUrl = await this.uploaderService.upload(gifPath, fileName);
 
-      if (!uploadPath) {
+      if (!assetUrl) {
         return new ProcessError('Error during the file upload');
       }
 
-      await this.cacheService.store(url, uploadPath);
+      await this.cacheService.store(videoUrl, assetUrl);
 
-      return uploadPath;
+      return this.formatResponse(assetUrl);
     } catch (error) {
       throw error;
     } finally {

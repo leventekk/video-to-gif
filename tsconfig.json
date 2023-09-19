@@ -1,8 +1,14 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
+  "baseUrl": "./",
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "types/*.ts"],
+  "paths": {
+    "@service/*": ["src/services/*"],
+    "@schema/*": ["src/schema/*"],
+    "@error/*": ["src/errors/*"]
+  },
+  "include": ["src/**/*.ts", "types/*.d.ts"],
   "exclude": ["node-modules"]
 }

@@ -10,9 +10,9 @@ export class MemoryCache implements VideoCache {
     this.logger = this.loggerService.child({ service: 'MemoryCache' });
   }
 
-  async store(key: string, path: string) {
-    this.logger.info('Storing dataset %o in cache', { key, path });
-    cache.set(key, path);
+  async store(key: string, value: string) {
+    this.logger.info('Storing dataset %o in cache', { key, value });
+    cache.set(key, value);
   }
 
   async get(key: string) {

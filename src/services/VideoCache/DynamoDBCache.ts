@@ -24,15 +24,15 @@ export class DynamoDBCache implements VideoCache {
     });
   }
 
-  async store(key: string, path: string) {
-    this.logger.info('Storing dataset %o in cache', { key, path });
+  async store(key: string, value: string) {
+    this.logger.info('Storing dataset %o in cache', { key, value });
 
     await this.client.send(
       new PutItemCommand({
         TableName: this.config.tableName,
         Item: {
           VideoUrl: { S: key },
-          ImageUrl: { S: path },
+          ImageUrl: { S: value },
         },
       }),
     );

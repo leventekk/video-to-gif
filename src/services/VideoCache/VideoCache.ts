@@ -1,4 +1,4 @@
 export interface VideoCache {
-  store(key: string, path: string): Promise<void>;
+  store(key: string, value: string): Promise<void>;
   get(key: string): Promise<Nullable<string>>;
 }
