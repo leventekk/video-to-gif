@@ -1,6 +1,4 @@
 import Ffmpeg from 'ffmpeg';
-import sharp from 'sharp';
-import { createWriteStream } from 'fs';
 import { type VideoConverter } from './VideoConverter';
 import { type Logger } from '../Logger/Logger';
 
@@ -19,20 +17,7 @@ export class FfmpegConverter implements VideoConverter {
       // improve gif quality
       converterProcess.addCommand('-filter_complex', '"[0:v] split [a][b];[a] palettegen [p];[b][p] paletteuse"');
 
-      const convertedPath = await converterProcess.save(outputPath);
-
-      // logger.info('Optimizing image');
-      const optimizedBuffer = await sharp(convertedPath, {
-        animated: true,
-      })
-        .gif({ effort: 10, interFrameMaxError: 10 })
-        .toBuffer();
-
-      const writeStream = createWriteStream(convertedPath);
-      writeStream.write(optimizedBuffer);
-      writeStream.end();
-
-      return convertedPath;
+      return await converterProcess.save(outputPath);
     } catch (error) {
       logger.fatal(error);
 
