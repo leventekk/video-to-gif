@@ -59,11 +59,13 @@ fastify.post<{ Body: ConvertRequestType; Reply: JobResponseType }>(
     );
 
     const jobCallback = async () => {
-      const processedVideo = await videoService.process(prepare(request.body.url));
-      logger.info('JobCallback completed successfully');
-
-      if (processedVideo instanceof ProcessError) {
-        throw new JobExecutionError(processedVideo.name)
+      try {
+        await videoService.process(prepare(request.body.url));
+        logger.info('JobCallback completed successfully');
+      } catch (error) {
+        if (error instanceof ProcessError) {
+          throw new JobExecutionError(error.message);
+        }
       }
     };
 

@@ -23,8 +23,10 @@ export class VideoService {
   }
 
   private cleanup() {
-    rmSync(this.mediaTempFile);
-    rmSync(this.videoTempFile);
+    try {
+      rmSync(this.mediaTempFile);
+      rmSync(this.videoTempFile);
+    } catch (_) {}
   }
 
   private formatResponse(url: string) {
@@ -42,20 +44,20 @@ export class VideoService {
       const downloadedVideo = await this.downloaderService.download(videoUrl, this.videoTempFile);
 
       if (!downloadedVideo) {
-        return new ProcessError('Error during the video download');
+        throw new ProcessError('Error during the video download');
       }
 
       const fileName = `${downloadedVideo.id}.gif`;
       const gifPath = await this.converterService.convert(downloadedVideo.path, this.mediaTempFile);
 
       if (!gifPath) {
-        return new ProcessError('Error during the gif conversion');
+        throw new ProcessError('Error during the gif conversion');
       }
 
       const assetUrl = await this.uploaderService.upload(gifPath, fileName);
 
       if (!assetUrl) {
-        return new ProcessError('Error during the file upload');
+        throw new ProcessError('Error during the file upload');
       }
 
       await this.cacheService.store(videoUrl, assetUrl);
