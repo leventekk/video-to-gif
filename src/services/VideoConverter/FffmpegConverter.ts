@@ -1,6 +1,8 @@
 import Ffmpeg from 'ffmpeg';
-import { type VideoConverter } from './VideoConverter';
+
 import { type Logger } from '../Logger/Logger';
+
+import { type VideoConverter } from './VideoConverter';
 
 export class FfmpegConverter implements VideoConverter {
   constructor(private loggerService: Logger) {}

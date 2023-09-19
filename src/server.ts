@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import Fastify from 'fastify';
-import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import { type TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 import { ConvertRequest, type ConvertRequestType } from './schema/convert';
 import { JobResponse, type JobResponseType } from './schema/job';

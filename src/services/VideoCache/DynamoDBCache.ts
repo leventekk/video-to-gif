@@ -1,6 +1,8 @@
 import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-dynamodb';
-import { type VideoCache } from './VideoCache';
+
 import { type Logger } from '../Logger/Logger';
+
+import { type VideoCache } from './VideoCache';
 
 interface DynamoDBConfig {
   tableName: string;
@@ -13,7 +15,10 @@ export class DynamoDBCache implements VideoCache {
   private client: DynamoDBClient;
   private logger: Logger;
 
-  constructor(private loggerService: Logger, private config: DynamoDBConfig) {
+  constructor(
+    private loggerService: Logger,
+    private config: DynamoDBConfig,
+  ) {
     this.logger = this.loggerService.child({ service: 'DynamoDBCache' });
     this.client = new DynamoDBClient({
       region: this.config.region,

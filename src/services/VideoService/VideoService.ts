@@ -1,12 +1,14 @@
 import { rmSync } from 'node:fs';
-import tmp from 'tmp';
+
+import { setGracefulCleanup, tmpNameSync } from 'tmp';
+
 import { ProcessError } from '../../errors/ProcessError';
 import { type VideoCache } from '../VideoCache/VideoCache';
 import { type VideoDownloader } from '../VideoDownloader/VideoDownloader';
 import { type VideoConverter } from '../VideoConverter/VideoConverter';
 import { type FileUploader } from '../FileUploader/FileUploader';
 
-tmp.setGracefulCleanup();
+setGracefulCleanup();
 
 export class VideoService {
   private videoTempFile: string;
@@ -18,8 +20,8 @@ export class VideoService {
     private converterService: VideoConverter,
     private uploaderService: FileUploader,
   ) {
-    this.videoTempFile = tmp.tmpNameSync();
-    this.mediaTempFile = tmp.tmpNameSync();
+    this.videoTempFile = tmpNameSync();
+    this.mediaTempFile = tmpNameSync();
   }
 
   private cleanup() {

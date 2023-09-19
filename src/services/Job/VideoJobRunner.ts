@@ -1,10 +1,12 @@
 import { randomUUID } from 'node:crypto';
+
 import { Logger } from '../Logger/Logger';
-import { type JobRunner } from './JobRunner';
 import { type JobCache } from '../JobCache/JobCache';
 import { type Status } from '../../schema/job';
 import { JobExecutionError } from '../../errors/JobExecutionError';
 import { type VideoCache } from '../VideoCache/VideoCache';
+
+import { type JobRunner } from './JobRunner';
 
 export class VideoJobRunner implements JobRunner {
   private logger: Logger;

@@ -1,4 +1,5 @@
 import { type FastifyBaseLogger } from 'fastify';
+
 import { type Logger } from './Logger';
 
 export class FastifyLogger implements Logger {

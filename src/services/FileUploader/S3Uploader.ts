@@ -1,7 +1,10 @@
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { readFileSync } from 'node:fs';
-import { type FileUploader } from './FileUploader';
+
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
 import { type Logger } from '../Logger/Logger';
+
+import { type FileUploader } from './FileUploader';
 
 interface S3Config {
   bucketName: string;

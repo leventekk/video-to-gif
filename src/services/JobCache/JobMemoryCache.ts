@@ -1,4 +1,5 @@
 import { type Logger } from '../Logger/Logger';
+
 import { type JobCache, type JobEntry } from './JobCache';
 
 const cache = new Map<string, JobEntry>();

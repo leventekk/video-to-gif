@@ -1,5 +1,6 @@
-import { type VideoCache } from './VideoCache';
 import { type Logger } from '../Logger/Logger';
+
+import { type VideoCache } from './VideoCache';
 
 const cache = new Map<string, string>();
 

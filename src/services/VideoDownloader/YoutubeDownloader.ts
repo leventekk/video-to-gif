@@ -1,6 +1,8 @@
 import youtubeDL, { type YtFlags } from 'youtube-dl-exec';
-import { type VideoDownloader } from './VideoDownloader';
+
 import { type Logger } from '../Logger/Logger';
+
+import { type VideoDownloader } from './VideoDownloader';
 
 export class YoutubeDownloader implements VideoDownloader {
   constructor(private loggerService: Logger) {}
