@@ -1,4 +1,4 @@
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type JobCache, type JobEntry } from './JobCache';
 

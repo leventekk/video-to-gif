@@ -1,6 +1,6 @@
 import { DynamoDBClient, PutItemCommand, GetItemCommand } from '@aws-sdk/client-dynamodb';
 
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type VideoCache } from './VideoCache';
 

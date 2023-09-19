@@ -1,6 +1,6 @@
 import Ffmpeg from 'ffmpeg';
 
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type VideoConverter } from './VideoConverter';
 

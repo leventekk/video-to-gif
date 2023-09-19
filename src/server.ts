@@ -1,22 +1,22 @@
 import 'dotenv/config';
 
-import Fastify from 'fastify';
 import { type TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import Fastify from 'fastify';
 
-import { ConvertRequest, type ConvertRequestType } from './schema/convert';
-import { JobResponse, type JobResponseType } from './schema/job';
-import { type Logger } from './services/Logger/Logger';
-import { type VideoCache } from './services/VideoCache/VideoCache';
-import { YoutubeDownloader } from './services/VideoDownloader/YoutubeDownloader';
-import { VideoService } from './services/VideoService/VideoService';
-import { FfmpegConverter } from './services/VideoConverter/FffmpegConverter';
-import { ProcessError } from './errors/ProcessError';
-import { S3Uploader } from './services/FileUploader/S3Uploader';
-import { DynamoDBCache } from './services/VideoCache/DynamoDBCache';
-import { FastifyLogger } from './services/Logger/FastifyLogger';
-import { VideoJobRunner } from './services/Job/VideoJobRunner';
-import { JobMemoryCache } from './services/JobCache/JobMemoryCache';
-import { JobExecutionError } from './errors/JobExecutionError';
+import { JobExecutionError } from '@error/JobExecutionError';
+import { ProcessError } from '@error/ProcessError';
+import { ConvertRequest, type ConvertRequestType } from '@schema/convert';
+import { JobResponse, type JobResponseType } from '@schema/job';
+import { S3Uploader } from '@service/FileUploader/S3Uploader';
+import { VideoJobRunner } from '@service/Job/VideoJobRunner';
+import { JobMemoryCache } from '@service/JobCache/JobMemoryCache';
+import { FastifyLogger } from '@service/Logger/FastifyLogger';
+import { type Logger } from '@service/Logger/Logger';
+import { DynamoDBCache } from '@service/VideoCache/DynamoDBCache';
+import { type VideoCache } from '@service/VideoCache/VideoCache';
+import { FfmpegConverter } from '@service/VideoConverter/FffmpegConverter';
+import { YoutubeDownloader } from '@service/VideoDownloader/YoutubeDownloader';
+import { VideoService } from '@service/VideoService/VideoService';
 
 function prepare(url: string) {
   return url.trim();

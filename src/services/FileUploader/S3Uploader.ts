@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type FileUploader } from './FileUploader';
 

@@ -1,10 +1,10 @@
 import { randomUUID } from 'node:crypto';
 
-import { Logger } from '../Logger/Logger';
-import { type JobCache } from '../JobCache/JobCache';
-import { type Status } from '../../schema/job';
-import { JobExecutionError } from '../../errors/JobExecutionError';
-import { type VideoCache } from '../VideoCache/VideoCache';
+import { JobExecutionError } from '@error/JobExecutionError';
+import { type Status } from '@schema/job';
+import { type JobCache } from '@service/JobCache/JobCache';
+import { Logger } from '@service/Logger/Logger';
+import { type VideoCache } from '@service/VideoCache/VideoCache';
 
 import { type JobRunner } from './JobRunner';
 

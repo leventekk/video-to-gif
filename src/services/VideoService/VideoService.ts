@@ -2,11 +2,11 @@ import { rmSync } from 'node:fs';
 
 import { setGracefulCleanup, tmpNameSync } from 'tmp';
 
-import { ProcessError } from '../../errors/ProcessError';
-import { type VideoCache } from '../VideoCache/VideoCache';
-import { type VideoDownloader } from '../VideoDownloader/VideoDownloader';
-import { type VideoConverter } from '../VideoConverter/VideoConverter';
-import { type FileUploader } from '../FileUploader/FileUploader';
+import { ProcessError } from '@error/ProcessError';
+import { type FileUploader } from '@service/FileUploader/FileUploader';
+import { type VideoCache } from '@service/VideoCache/VideoCache';
+import { type VideoConverter } from '@service/VideoConverter/VideoConverter';
+import { type VideoDownloader } from '@service/VideoDownloader/VideoDownloader';
 
 setGracefulCleanup();
 

@@ -1,4 +1,4 @@
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type VideoCache } from './VideoCache';
 

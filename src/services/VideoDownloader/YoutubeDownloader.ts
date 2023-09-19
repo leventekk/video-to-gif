@@ -1,6 +1,6 @@
 import youtubeDL, { type YtFlags } from 'youtube-dl-exec';
 
-import { type Logger } from '../Logger/Logger';
+import { type Logger } from '@service/Logger/Logger';
 
 import { type VideoDownloader } from './VideoDownloader';
 
