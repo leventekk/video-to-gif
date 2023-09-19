@@ -26,4 +26,6 @@ COPY --from=ytdlp /usr/local/bin/yt-dlp /bin/yt-dlp
 
 EXPOSE 3000
 
+HEALTHCHECK CMD curl --fail http://localhost:3000/healthcheck || exit 1
+
 CMD [ "pnpm", "start" ]
