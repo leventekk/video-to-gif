@@ -1,5 +1,3 @@
-# ffmpeg docker
-# FROM jrottenberg/ffmpeg:4.4-alpine313 AS ffmpeg-image
 FROM tnk4on/yt-dlp:alpine-static AS ytdlp
 
 # pnpm docker

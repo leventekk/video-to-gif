@@ -1,4 +1,5 @@
 import 'dotenv/config';
+
 import Fastify from 'fastify';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
@@ -53,7 +54,7 @@ fastify.get('/healthcheck', async function handler() {
 });
 
 fastify.post<{ Body: ConvertRequestType; Reply: JobResponseType }>(
-  '/job',
+  '/create-job',
   {
     schema: {
       body: ConvertRequest,
@@ -70,7 +71,6 @@ fastify.post<{ Body: ConvertRequestType; Reply: JobResponseType }>(
     const jobRunnerCallback = async () => {
       try {
         await videoService.process(prepare(request.body.url));
-        logger.info('JobCallback completed successfully');
       } catch (error) {
         if (error instanceof ProcessError) {
           throw new JobExecutionError(error.message);

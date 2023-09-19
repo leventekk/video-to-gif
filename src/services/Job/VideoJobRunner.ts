@@ -14,7 +14,7 @@ export class VideoJobRunner implements JobRunner {
     private videoCacheService: VideoCache,
     private loggerService: Logger,
   ) {
-    this.logger = this.loggerService.child({ service: 'Job' });
+    this.logger = this.loggerService.child({ service: 'VideoJobRunner' });
   }
 
   private async check(url: string) {
