@@ -9,7 +9,6 @@ data "aws_iam_policy_document" "dynamodb_policy" {
       "dynamodb:getitem",
       "dynamodb:putitem",
     ]
-    # resources = var.dynamodb_tables_resources.map
     resources = [for resource in var.dynamodb_tables_resources : "${resource}*"]
   }
 }
