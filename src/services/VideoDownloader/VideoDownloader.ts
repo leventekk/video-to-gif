@@ -1,9 +1,9 @@
 interface DownloadResponse {
-  id: string
-  path: string
-  url: string
+  id: string;
+  path: string;
+  url: string;
 }
 
 export interface VideoDownloader {
-  download(url: string, outputPath: string): Promise<Nullable<DownloadResponse>>
+  download(url: string, outputPath: string): Promise<Nullable<DownloadResponse>>;
 }

@@ -1,2 +1,1 @@
-export class JobExecutionError extends Error {
-}
+export class JobExecutionError extends Error {}

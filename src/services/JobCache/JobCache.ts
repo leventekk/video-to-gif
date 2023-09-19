@@ -1,7 +1,7 @@
 import { type DefaultJobResponseType, type JobResponseType } from '../../schema/job';
 
 export interface JobEntry extends Omit<DefaultJobResponseType, 'jobId'> {
-  url: string
+  url: string;
 }
 
 export interface JobCache {

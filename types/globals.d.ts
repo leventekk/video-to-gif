@@ -1,1 +1,1 @@
-type Nullable<T> = null | T
+type Nullable<T> = null | T;

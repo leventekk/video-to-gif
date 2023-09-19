@@ -1,2 +1,1 @@
-export class ProcessError extends Error {
-}
+export class ProcessError extends Error {}

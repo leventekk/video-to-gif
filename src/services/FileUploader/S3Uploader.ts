@@ -11,7 +11,10 @@ interface S3Config {
 }
 
 export class S3Uploader implements FileUploader {
-  constructor(private loggerService: Logger, private config: S3Config) {}
+  constructor(
+    private loggerService: Logger,
+    private config: S3Config,
+  ) {}
 
   private getObjectUrl(name: string) {
     return `https://${this.config.bucketName}.s3.${this.config.region}.amazonaws.com/${name}`;

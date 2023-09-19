@@ -9,7 +9,11 @@ import { type VideoCache } from '../VideoCache/VideoCache';
 export class VideoJobRunner implements JobRunner {
   private logger: Logger;
 
-  constructor(private cacheService: JobCache, private videoCacheService: VideoCache, private loggerService: Logger) {
+  constructor(
+    private cacheService: JobCache,
+    private videoCacheService: VideoCache,
+    private loggerService: Logger,
+  ) {
     this.logger = this.loggerService.child({ service: 'Job' });
   }
 

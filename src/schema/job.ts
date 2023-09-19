@@ -19,7 +19,7 @@ const CompletedJobResponse = Type.Object({
   jobId,
   status: completedJobStatus,
   data: Type.Object({
-    url: Type.String()
+    url: Type.String(),
   }),
 });
 

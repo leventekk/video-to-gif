@@ -12,7 +12,7 @@ DYNAMODB_ASSET_CACHE_TABLE=video-cache-table-name
 DYNAMODB_JOB_RUNNER_TABLE=video-cache-table-name
 ```
 
-
 ## Requirements
+
 - yt-dlp
 - ffmpeg
